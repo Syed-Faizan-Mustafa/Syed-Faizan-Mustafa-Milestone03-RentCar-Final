@@ -1,7 +1,7 @@
-import { Slug } from "sanity";
+
 
 // types/car.d.ts
-export interface Car {
+export type carData ={
     _id: string;
     name: string;
     brand: string;
@@ -14,17 +14,17 @@ export interface Car {
     description: string;
     tags: string[];
     imageUrl: string;
-    reviews?: Review[];
-    slug:{
-      _type:"slug"
-      current: string;
-    }
+    // reviews?: Review[];
+    // slug:{
+    //   _type:"slug"
+    //   current: string;
+    // }
   }
 
-  export interface Review {
-    _id: string;
-    author: string;
-    rating: number;
-    comment: string;
-    date: string;
-  }
+  // export interface Review {
+  //   _id: string;
+  //   author: string;
+  //   rating: number;
+  //   comment: string;
+  //   date: string;
+  // }

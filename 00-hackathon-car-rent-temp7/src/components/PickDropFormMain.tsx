@@ -1,6 +1,7 @@
 "use client";
+import Image from "next/image";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function PickDropFormMain() {
   const [pickUpDate, setPickUpDate] = useState("20 July 2022");
@@ -24,14 +25,20 @@ export default function PickDropFormMain() {
 
         {/* Swap Icon */}
         <div className="md:self-center w-[60px] h-[60px] bg-blue-600 hover:bg-blue-500 rounded-lg flex items-center justify-center order-2">
-          <img src="/Swap.png" alt="Switch" className="w-[24px] h-[24px] shadow-lg" />
+          <Image
+            src="/Swap.png"
+            alt="Switch"
+            width={60}
+            height={60}
+            className="w-[24px] h-[24px] shadow-lg"
+          />
         </div>
 
         {/* Drop-Off Section */}
         <div className="flex-1 max-w-md order-3">
           <SectionHeader title="Drop - Off" color="bg-blue-300" />
           <div className="flex gap-4 mt-4">
-            <DropdownField label="Locations" value="Kota Semarang"/>
+            <DropdownField label="Locations" value="Kota Semarang" />
             <DropdownField label="Date" value="21 July 2022" />
             <DropdownField label="Time" value="01.00" />
           </div>

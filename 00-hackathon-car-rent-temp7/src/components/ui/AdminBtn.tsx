@@ -1,3 +1,4 @@
+import Image from "next/image";
 const AdminBtn = () => {
   return (
     <div>
@@ -143,9 +144,11 @@ const AdminBtn = () => {
                   className="hidden peer"
                 />
                 <div className="transition-transform transform peer-hover:scale-110 peer-checked:scale-110 peer-checked:border-blue-500">
-                  <img
+                  <Image
                     src="/Dashboard-10-dayMode.png"
                     alt="Option 1"
+                    width={28}
+                    height={28}
                     className="ml-10 w-[28px] h-[28px]"
                   />
                 </div>
@@ -159,9 +162,11 @@ const AdminBtn = () => {
                   className="hidden peer"
                 />
                 <div className="transition-transform transform peer-hover:scale-110 peer-checked:scale-150 rounded-full p-[2px] peer-checked:border-blue-500 peer-checked:bg-blue-500">
-                  <img
+                  <Image
                     src="/Dashboard-11-nightMode.png"
                     alt="Option 2"
+                    width={28}
+                    height={28}
                     className="w-[15px] h-[15px]"
                   />
                 </div>
@@ -171,17 +176,17 @@ const AdminBtn = () => {
         </div>
       </div>
       <div>
-          <button className="text-[#90A3BF] hover:bg-blue-500 hover:text-white flex gap-3 w-[254px] h-[56px] mt-12 ml-[16px] rounded-[10px] items-center ">
-            <div
-              className="w-[24px] h-[24px] bg-[#90A3BF] hover:bg-white mask mask-image"
-              style={{
-                maskImage: `url(/Dashboard-12-logout.png)`,
-                WebkitMaskImage: `url(/Dashboard-12-logout.png)`,
-              }}
-            ></div>
-            LogOut
-          </button>
-        </div>
+        <button className="text-[#90A3BF] hover:bg-blue-500 hover:text-white flex gap-3 w-[254px] h-[56px] mt-12 ml-[16px] rounded-[10px] items-center ">
+          <div
+            className="w-[24px] h-[24px] bg-[#90A3BF] hover:bg-white mask mask-image"
+            style={{
+              maskImage: `url(/Dashboard-12-logout.png)`,
+              WebkitMaskImage: `url(/Dashboard-12-logout.png)`,
+            }}
+          ></div>
+          LogOut
+        </button>
+      </div>
     </div>
   );
 };

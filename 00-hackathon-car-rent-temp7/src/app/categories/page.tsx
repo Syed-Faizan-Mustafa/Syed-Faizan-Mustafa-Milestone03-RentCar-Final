@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allCars } from "@/sanity/lib/queries";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "@components/Sidebar"
 import PickDropFormMain from "@/components/PickDropFormMain";
 import {
   Card,
@@ -13,12 +13,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
+import { carData } from "../../../types/types";
 
-export default async function Page() {
-  let cars = [];
+export default async function CategoriesPage() {
+  let cars: carData[] = [];
 
   try {
-    cars = await sanityFetch({ query: allCars });
+    cars = await sanityFetch<carData[]>({ query: allCars });
   } catch (error) {
     console.error("Error fetching cars:", error);
   }

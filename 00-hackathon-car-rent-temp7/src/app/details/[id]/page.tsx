@@ -4,8 +4,7 @@ import { carQuery, allCars } from "@/sanity/lib/queries";
 import Image from "next/image";
 import DetailsCard from "@/components/ui/DetailsCard";
 import Sidebar from "@/components/Sidebar";
-import { Car } from "../../../../types/car";
-import Reviews from "@/components/ui/Reviews";
+import { carData } from "../../../../types/types";
 import {
   Card,
   CardContent,
@@ -16,23 +15,22 @@ import {
 } from "@/components/ui/Card";
 import Link from "next/link";
 
-export default async function DetailPage({
-  params,
-}: {
-  params: { id?: string };
-}) {
-  console.log(" params.id:", params.id); // Debugging: See what `id` is being passed
+interface Props {
+  params: Promise<{ id: string }>;
+}
 
+export default async function DetailPage({ params }: Props) {
   // ✅ Ensure `id` is defined before making the Sanity query
-  if (!params.id) {
+  const Params = await params;
+  if (!Params?.id) {
     return <div>Error: Missing Car ID</div>;
   }
-  const car = await sanityFetch<Car>({
+  const car = await sanityFetch<carData | null>({
     query: carQuery,
-    params: { id: params.id },
+    params: { id: Params.id },
   });
   // Fetch all cars
-  const allCarsList = await sanityFetch<Car[]>({
+  const allCarsList = await sanityFetch<carData[]>({
     query: allCars,
   });
 
@@ -44,7 +42,6 @@ export default async function DetailPage({
         <Sidebar />
       </div>
       <div className="sec w-full sm:w-[75%] bg-[#f6f7f9] p-4 sm:p-6 flex flex-col gap-10">
-        <Reviews reviews={car.reviews || []} carId={car._id} />
         <section className="w-full flex flex-col md:flex-row gap-5 items-stretch justify-around">
           <div className="first flex flex-col gap-4 w-full lg:max-w-[470px]">
             <Image
@@ -72,7 +69,7 @@ export default async function DetailPage({
             </Link>
           </div>
           <div className="sec grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:px-5 ">
-            {allCarsList.map((c:any) => (
+            {allCarsList.map((c: carData) => (
               <Card
                 key={c._id}
                 className="w-full max-w-[304px] mx-auto h-auto flex flex-col justify-between"
@@ -85,12 +82,12 @@ export default async function DetailPage({
                   <CardDescription>{c.type}</CardDescription>
                 </CardHeader>
                 <CardContent className="w-full flex flex-col items-center justify-center gap-4">
-                <Image
-                  src={c.imageUrl}
-                  alt={c.name}
-                  width={232}
-                  height={72}
-                />
+                  <Image
+                    src={c.imageUrl}
+                    alt={c.name}
+                    width={232}
+                    height={72}
+                  />
                 </CardContent>
                 <CardFooter className="w-full flex items-center justify-between">
                   <p className="text-2xl font-semibold leading-none tracking-tight">
@@ -105,7 +102,6 @@ export default async function DetailPage({
                 </CardFooter>
               </Card>
             ))}
-
           </div>
         </section>
       </div>
